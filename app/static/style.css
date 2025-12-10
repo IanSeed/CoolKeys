@@ -1,0 +1,239 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif; 
+}
+
+body {
+    
+    background: #011526; 
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    min-height: 100vh;
+}
+
+
+.container {
+    
+    background: #032CA6; 
+    width: 420px;
+    border: 2px solid rgba(255, 255, 255, 0.1); 
+    border-radius: 10px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5); 
+    padding: 40px;
+}
+
+
+.container h1 {
+    font-size: 36px;
+    text-align: center;
+    color: white;
+    margin-bottom: 25px;
+}
+
+
+.input-box {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    margin: 30px 0;
+}
+
+.input-box input {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 40px;
+    font-size: 16px;
+    color: white;
+    padding: 20px 45px 20px 20px;
+}
+
+.input-box input::placeholder {
+    color: #cccccc; 
+}
+
+.input-box .bx {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: white;
+}
+
+
+.remember-forgot {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14.5px;
+    margin: -15px 0 15px;
+    color: white;
+}
+
+.remember-forgot label input {
+    accent-color: #3D46F2; 
+    margin-right: 4px;
+}
+
+.remember-forgot a {
+    color: #048ABF; 
+    text-decoration: none;
+}
+
+.remember-forgot a:hover {
+    text-decoration: underline;
+}
+
+
+.btn {
+    width: 100%;
+    height: 45px;
+    background: #3D46F2; 
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    font-size: 16px;
+    color: #011526; 
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    
+    background: #3037CC; 
+}
+
+
+.register-link {
+    font-size: 14.5px;
+    text-align: center;
+    margin-top: 20px;
+    color: white;
+}
+
+.register-link p a {
+    color: #3D46F2; 
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.register-link p a:hover {
+    text-decoration: underline;
+}
+/* 1. Estilo Básico do Footer */
+footer {
+    background-color: #2c3e50; /* Cor de fundo escura (Azul Marinho) */
+    color: white;
+    padding: 40px 0;
+    width: 100%;
+}
+
+/* O container para limitar a largura e centralizar */
+.footer-content {
+    max-width: 1200px; 
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex; /* Habilita o layout Flexbox */
+    justify-content: space-between; /* Distribui o espaço entre as colunas */
+    flex-wrap: wrap; /* Permite que as colunas quebrem em telas menores */
+    gap: 30px; /* Espaço entre as colunas */
+}
+
+/* Estilo das seções */
+.footer-section {
+    flex: 1; /* Permite que as seções cresçam */
+    min-width: 200px; /* Largura mínima para evitar que fiquem muito estreitas */
+}
+
+.footer-section h3, 
+.footer-section h4 {
+    margin-bottom: 15px;
+    font-size: 18px;
+    border-bottom: 2px solid #3498db; /* Linha de destaque para títulos */
+    padding-bottom: 5px;
+}
+
+/* 2. Estilo dos Links */
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 8px;
+}
+
+.footer-section a {
+    color: #bdc3c7; /* Cor do link mais clara */
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-section a:hover {
+    color: #3498db; /* Cor de destaque no hover */
+}
+
+/* 3. Estilo dos Botões */
+.footer-btn {
+    background-color: #3498db; /* Azul vibrante para o botão */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 10px;
+    margin-bottom: 15px;
+    transition: background-color 0.3s;
+}
+
+.footer-btn:hover {
+    background-color: #2980b9; /* Um tom de azul mais escuro no hover */
+}
+
+.email-info {
+    font-size: 14px;
+    margin-top: 5px;
+    color: #bdc3c7;
+}
+
+/* 4. Responsividade (para telas menores) */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column; /* Coloca as colunas uma abaixo da outra */
+        text-align: center;
+    }
+    
+    .footer-section {
+        margin-bottom: 20px;
+    }
+
+    .footer-section h3, 
+    .footer-section h4 {
+        border-bottom: none;
+    }
+
+    .footer-section ul {
+        text-align: center;
+    }
+    
+    .footer-section ul li {
+        display: inline-block; /* Links em linha */
+        margin: 0 10px;
+    }
+    
+    .contact-support {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}

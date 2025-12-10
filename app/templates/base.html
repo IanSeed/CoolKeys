@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoolKeys</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body>
+    <header>
+    <nav>
+        <h2>CoolKeys</h2>
+        
+        <div>
+            <a href="/">Jogos</a>
+            <a href="/rpg">Rpg</a>
+            <a href="/ação">Ação</a>
+            <a href="/corrida">Corrida</a>
+            
+            {% if user.is_authenticated %} <span style="margin-left: 15px; font-size: 0.9em; color: #bdc3c7;">
+                    Bem vindo, {{ user.username }}
+                </span>
+            {% endif %}
+        </div>
+    </nav>
+    </header>
+    
+    <main>
+    <div class="container">
+        {% block conteudo %}
+        {% endblock %}
+    </div>
+    </main>
+    
+    <footer>
+        <div class="footer-content container">
+            
+            <div class="footer-section about">
+                <h3>Nossa empresa</h3>
+                <p>&copy; 2025 Todos os direitos reservados.</p>
+            </div>
+            
+            <div class="footer-section links">
+                <h4>Links Rápidos</h4>
+                <ul>
+                    <li><a href="#">Sobre Nós</a></li>
+                    <li><a href="#">Serviços</a></li>
+                    <li><a href="#">Termos de Uso</a></li>
+                    <li><a href="#">Política de Privacidade</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section contact-support">
+                <h4>Fale Conosco</h4>
+                
+                <button class="footer-btn support-btn">
+                    Suporte
+                </button>
+                
+                <button class="footer-btn contact-btn">
+                    Contato
+                </button>
+                
+                <p class="email-info">Email: info@exemplo.com</p>
+            </div>
+        </div>
+    </footer> 
+</body>
