@@ -1,6 +1,10 @@
+# loja/urls.py
 from django.urls import path
-from . import views 
+from . import views
+
 
 urlpatterns = [
-    path('', views.home_view, name='app'),
-]
+
+    path('', views.home_view, name='home'),
+]  
+ 

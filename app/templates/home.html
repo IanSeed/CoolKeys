@@ -1,1 +1,88 @@
+<!-- templates/home.html -->
+{% extends 'base.html' %}
 
+{% block title %}Game Rampads - Sua Loja de Jogos PC{% endblock %}
+
+{% block content %}
+    <!-- Hero Section -->
+    <section class="hero-section" id="home">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <h1 class="hero-title">Os melhores descontos você encontra aqui!</h1>
+                    <p class="hero-subtitle">Encontre os melhores jogos com os maiores descontos</p>
+                    
+                    <div class="d-flex flex-wrap gap-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="gotyCheck">
+                            <label class="form-check-label" for="gotyCheck">
+                                RPG
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="dlcCheck">
+                            <label class="form-check-label" for="dlcCheck">
+                                DLCs
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="multiCheck">
+                            <label class="form-check-label" for="multiCheck">
+                                Multijogador
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4">
+                        <a href="#games" class="btn btn-primary btn-lg me-3">
+                            <i class="bi bi-joystick"></i> Ver Jogos
+                        </a>
+                        <a href="#deals" class="btn btn-outline-light btn-lg">
+                            <i class="bi bi-percent"></i> Promoções
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Featured Games Section -->
+        <section id="games" class="mb-5">
+            <h2 class="section-title">JOGOS EM DESTAQUE</h2>
+            
+            <div class="row">
+                <!-- Elden Ring -->
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="game-card">
+                        <div class="position-relative">
+                            <img src="https://tse2.mm.bing.net/th/id/OIP.2s0uUJT2jlq5ti-3Z8Ty1wHaHa?cb=ucfimg2&ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3" 
+                                 alt="Elden Ring - Jogo de RPG e Ação" 
+                                 class="game-img img-loading">
+                            <span class="badge bg-danger position-absolute top-0 end-0 m-2">-30%</span>
+                        </div>
+                        <div class="p-3">
+                            <h3 class="game-title">ELDEN RING</h3>
+                            <p class="game-category">RPG • Ação • Mundo Aberto</p>
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <div>
+                                    <span class="game-price">R$ 149,90</span>
+                                    <span class="game-old-price ms-2">R$ 214,90</span>
+                                </div>
+                                <span class="badge bg-warning text-dark">GOTY 2022</span>
+                            </div>
+                            <button class="btn-add-cart focus-visible">
+                                <i class="bi bi-cart-plus"></i> Adicionar ao Carrinho
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Nightreign -->
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="game-card">
+                        <div class="position-relative">
+                            <img src="data:image/webp;base64,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"
+                            
+                            {% endblock %}
