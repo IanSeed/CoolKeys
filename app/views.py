@@ -68,3 +68,38 @@ def adicionar_carrinho(request, jogo_id):
     
     # 5. REDIRECIONA CORRETAMENTE
     return redirect('/')
+
+def carrinho_view(request):
+    #Página para visualizar o carrinho ativo
+    # Busca o carrinho ativo (status='carrinho')
+    carrinho = Compra.objects.filter(
+        usuario=request.user,
+        status='carrinho'
+    ).first()
+    
+    # Se não existir carrinho, cria um vazio
+    if not carrinho:
+        carrinho = Compra.objects.create(
+            usuario=request.user,
+            status='carrinho',
+            valor_total=0
+        )
+    
+    # Pega todos os itens do carrinho
+    itens_carrinho = carrinho.itens.all() if carrinho else []
+    
+    # Calcula total (pode usar o valor_total salvo ou recalcular)
+    total = carrinho.valor_total if carrinho else 0
+    
+    context = {
+        'carrinho': carrinho,
+        'itens': itens_carrinho,
+        'total': total,
+    }
+
+
+    return render(
+        request,
+        'carrinho.html',
+        context
+    )
