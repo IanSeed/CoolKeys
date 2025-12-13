@@ -1,81 +1,87 @@
 {% extends 'base.html' %}
 
-{% block title %}Game Rampads - Sua Loja de Jogos PC{% endblock %}
+{% block title %}CoolKeys - Sua Loja de Keys PC{% endblock %}
 
 {% block conteudo %}
-    <!-- Hero Section -->
-    <section class="hero-section" id="home">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-8">
-                    <h1 class="hero-title">Os melhores descontos você encontra aqui!</h1>
-                    <p class="hero-subtitle">Encontre os melhores jogos com os maiores descontos</p>
-                    
-                    <div class="d-flex flex-wrap gap-3">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="gotyCheck">
-                            <label class="form-check-label" for="gotyCheck">
-                                RPG
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="dlcCheck">
-                            <label class="form-check-label" for="dlcCheck">
-                                DLCs
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="multiCheck">
-                            <label class="form-check-label" for="multiCheck">
-                                Multijogador
-                            </label>
-                        </div>
-                    </div>
-                    
-                    <div class="mt-4">
-                        <a href="#games" class="btn btn-primary btn-lg me-3">
-                            <i class="bi bi-joystick"></i> Ver Jogos
-                        </a>
-                        <a href="#deals" class="btn btn-outline-light btn-lg">
-                            <i class="bi bi-percent"></i> Promoções
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<div class="home-page">
+    {% load static %}
 
-    <!-- Main Content -->
-    <div class="container">
-        <!-- Featured Games Section -->
-        <section id="games" class="mb-5">
-            <h2 class="section-title">JOGOS EM DESTAQUE</h2>
+    <div class="container mt-4">
+        <h1 class="mb-4 text-left text-primary">🔥Jogos por Categoria em Destaque🔥</h1>
+        
+        {% for categoria in categorias %}
             
-            <div class="row">
-                <!-- Elden Ring -->
-                <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="game-card">
-                        <div class="position-relative">
-                            <img src="https://tse2.mm.bing.net/th/id/OIP.2s0uUJT2jlq5ti-3Z8Ty1wHaHa?cb=ucfimg2&ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3" 
-                                 alt="Elden Ring - Jogo de RPG e Ação" 
-                                 class="game-img img-loading">
-                            <span class="badge bg-danger position-absolute top-0 end-0 m-2">-30%</span>
-                        </div>
-                        <div class="p-3">
-                            <h3 class="game-title">ELDEN RING</h3>
-                            <p class="game-category">RPG • Ação • Mundo Aberto</p>
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <div>
-                                    <span class="game-price">R$ 149,90</span>
-                                    <span class="game-old-price ms-2">R$ 214,90</span>
-                                </div>
-                                <span class="badge bg-warning text-dark">GOTY 2022</span>
-                            </div>
-                            <button class="btn-add-cart focus-visible">
-                                <i class="bi bi-cart-plus"></i> Adicionar ao Carrinho
-                            </button>
-                        </div>
+            {% if categoria.destaque %}
+            <div class="card mb-5 shadow-lg" style="border-radius: 10px; border-color: #8be9fd;">
+                <div class="card-header bg-dark text-white" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h3 class="h4 mb-0" style="color: #50fa7b;">{{ categoria.nome }}</h3>
+                        <span class="badge bg-success text-dark p-2">
+                            {{ categoria.jogos.count }} jogo{{ categoria.jogos.count|pluralize }}
+                        </span>
                     </div>
+                    {% if categoria.descricao %}
+                    <p class="mb-0 mt-2 small text-muted">{{ categoria.descricao }}</p>
+                    {% endif %}
                 </div>
                 
- {% endblock %}
+                <div class="card-body bg-secondary text-light">
+                    {% if categoria.jogos.all %}
+                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+                        {% for jogo in categoria.jogos.all %}
+                        <div class="col">
+                            <div class="card h-100 bg-dark text-white" style="border-color: #44475a; transition: transform 0.2s;">
+                                
+                                <a href="/jogo/detalhe/{{ jogo.id }}" style="text-decoration: none; color: inherit;">
+                                    {% if jogo.icone %}
+                                    <img src="{{ jogo.icone.url }}" class="card-img-top" 
+                                        style="height: 180px; object-fit: cover;" 
+                                        alt="{{ jogo.nome }}">
+                                    {% endif %}
+                                    
+                                    <div class="card-body d-flex flex-column">
+                                        <h5 class="card-title text-truncate" style="color: #8be9fd;">{{ jogo.nome }}</h5>
+                                        <p class="card-text small flex-grow-1 text-muted">
+                                            {{ jogo.descricao|truncatewords:10 }}
+                                        </p>
+                                        
+                                        <div class="mt-auto pt-2">
+                                            <p class="h5 text-warning mb-2">R$ {{ jogo.preco|floatformat:2 }}</p>
+                                            
+                                            {% if user.is_authenticated %}
+                                            <form method="POST" action="{% url 'adicionar_carrinho' jogo.id %}">
+                                                {% csrf_token %}
+                                                <button type="submit" class="btn btn-primary btn-sm w-100" style="background-color: #50fa7b; border-color: #50fa7b; color: #282a36;">
+                                                    🛒 Adicionar ao Carrinho
+                                                </button>
+                                            </form>
+                                            {% else %}
+                                            <a href="{% url 'login' %}" class="btn btn-outline-info btn-sm w-100">
+                                                Login para comprar
+                                            </a>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <div class="alert alert-info bg-dark text-info mb-0 border-info">
+                        Nenhum jogo disponível nesta categoria.
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+        
+        {% empty %}
+            <div class="alert alert-warning text-center mt-5">
+                Nenhuma categoria marcada como destaque encontrada.
+            </div>
+        {% endfor %}
+    </div>
+
+</div>
+{% endblock %}

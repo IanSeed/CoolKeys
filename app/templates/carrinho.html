@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block title %} CoolKeys {% endblock %}
+
+{% block conteudo %}
+<div class="cart-page">
+    <h2 class="cart-title">Seu Carrinho de Compras</h2>
+
+    <div class="cart-container">
+        <div class="cart-items-list">
+            
+            {% if itens %}
+                {% for item in itens %}
+                    <div class="cart-item">
+                        <div class="item-image-container">
+                            <img src="{{ item.jogo.icone.url }}" alt="{{ item.jogo.nome }}">
+                        </div>
+                        <div class="item-details">
+                            <h4>{{ item.jogo.nome }} (x{{ item.quantidade }})</h4>
+                            <p>{% if item.jogo.categoria %}{{ item.jogo.categoria.nome }}{% else %}Sem Categoria{% endif %}</p>
+                        </div>
+                        <div class="item-price">R$ {{ item.subtotal|floatformat:2 }}</div>
+                        
+                        <form method="POST" action="{% url 'remover_item_carrinho' item.id %}" style="display:inline;">
+                             {% csrf_token %}
+                             <button type="submit" class="remove-button" title="Remover Item">X</button>
+                        </form>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p style="text-align:center;">Seu carrinho está vazio. Adicione alguns jogos!</p>
+            {% endif %}
+            
+        </div>
+
+        <div class="order-summary">
+            <h3 class="summary-title">Resumo do Pedido</h3>
+            
+            <div class="summary-line">
+                <span>Subtotal ({{ total_itens }} Itens)</span>
+                <span>R$ {{ subtotal|floatformat:2 }}</span>
+            </div>
+            
+            <div class="summary-line">
+                <span>Descontos</span>
+                <span>- R$ {{ descontos|floatformat:2 }}</span>
+            </div>
+            
+            <div class="summary-line total">
+                <span>Total a Pagar</span>
+                <span>R$ {{ total|floatformat:2 }}</span>
+            </div>
+            
+            {% if total_itens > 0 %}
+                <a href="{% url 'checkout' %}"> 
+                    <button class="checkout-button">
+                        Prosseguir para o Checkout
+                    </button>
+                </a>
+            {% else %}
+                <button class="checkout-button" disabled style="opacity: 0.5; cursor: not-allowed;">
+                    Carrinho Vazio
+                </button>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
